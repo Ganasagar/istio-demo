@@ -194,7 +194,7 @@ cat <<EOF | tee /tmp/pool-istio-ingressgateway.json
       "protocol": "TCP",
       "services": [{
         "mesos": {
-          "frameworkName": "kubernetes-cluster",
+          "frameworkName": "kubernetes-cluster1",
           "taskNamePattern": "^kube-node-.*$"
         },
         "endpoint": {
@@ -207,7 +207,7 @@ cat <<EOF | tee /tmp/pool-istio-ingressgateway.json
       "protocol": "TCP",
       "services": [{
         "mesos": {
-          "frameworkName": "kubernetes-cluster",
+          "frameworkName": "kubernetes-cluster1",
           "taskNamePattern": "^kube-node-.*$"
         },
         "endpoint": {
