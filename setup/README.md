@@ -48,24 +48,24 @@ kubectl apply -f install/kubernetes/istio-demo-auth.yaml
 Check that all pods and services in the newly created `istio-system` are in the state `running` or `completed`:
 
 ```bash
-kubectl get po -n istio-system
+➜  istio-1.1.8 kubectl get po -n istio-system
 NAME                                      READY   STATUS      RESTARTS   AGE
-grafana-59b8896965-772th                  1/1     Running     0          3h48m
-istio-citadel-856f994c58-tdjv2            1/1     Running     0          3h48m
-istio-cleanup-secrets-b9glv               0/1     Completed   0          3h48m
-istio-egressgateway-5649fcf57-bcfvw       1/1     Running     0          3h48m
-istio-galley-7665f65c9c-v2xdz             1/1     Running     0          3h48m
-istio-grafana-post-install-htd7v          0/1     Completed   0          3h49m
-istio-ingressgateway-6755b9bbf6-ztgp8     1/1     Running     0          3h48m
-istio-pilot-698959c67b-9rb29              2/2     Running     0          3h48m
-istio-policy-6fcb6d655f-nhk4g             2/2     Running     0          3h48m
-istio-security-post-install-lhzlm         0/1     Completed   0          3h48m
-istio-sidecar-injector-768c79f7bf-tpr6r   1/1     Running     0          3h48m
-istio-telemetry-664d896cf5-k74ld          2/2     Running     0          3h48m
-istio-telemetry-664d896cf5-pgjsv          2/2     Running     0          3h38m
-istio-tracing-6b994895fd-ffjmd            1/1     Running     0          3h48m
-prometheus-76b7745b64-w69nm               1/1     Running     0          3h48m
-servicegraph-5c4485945b-48jdq             1/1     Running     0          3h48m
+grafana-67c69bb567-xfrxr                  1/1     Running     0          85s
+istio-citadel-58fc8bfb55-6z7pk            1/1     Running     0          84s
+istio-cleanup-secrets-1.1.8-27c88         0/1     Completed   0          91s
+istio-egressgateway-6c4778d489-dmgzq      0/1     Running     0          85s
+istio-galley-79595c6b67-lmjs7             1/1     Running     0          86s
+istio-grafana-post-install-1.1.8-l9qw7    0/1     Completed   0          92s
+istio-ingressgateway-5c85cfc4c6-fkgl5     0/1     Running     0          85s
+istio-pilot-7cc5b9d8b-r6mtq               1/2     Running     0          85s
+istio-policy-66cccbdd69-2c28d             2/2     Running     2          85s
+istio-policy-66cccbdd69-tsrwm             2/2     Running     0          22s
+istio-security-post-install-1.1.8-gqlc4   0/1     Completed   0          90s
+istio-sidecar-injector-6fd47fb7c8-n6zdz   1/1     Running     0          84s
+istio-telemetry-74595b8b7-8jfpx           2/2     Running     2          85s
+istio-tracing-5d8f57c8ff-zqh92            1/1     Running     0          84s
+kiali-d4d886dd7-jtvc2                     1/1     Running     0          85s
+prometheus-d8d46c5b5-l5srp                1/1     Running     0          84s
 ```
 
 The Istio deployment also created a couple of services you can list them via:
