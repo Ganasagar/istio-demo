@@ -4,7 +4,7 @@
 
 This installation guide was tested with the following components:
 
-- Mesosphere DC/OS Enterprise 1.12.1
+- Mesosphere DC/OS Enterprise 1.12.3
 - Mesosphere Kubernetes Engine 2.2.0-1.13.3
 - Edge-LB 1.3.0
 - Istio 1.0.5
@@ -12,8 +12,21 @@ This installation guide was tested with the following components:
 Download and unpack Istio to your workstation:
 
 ```bash
-curl -L https://github.com/istio/istio/releases/download/1.0.5/istio-1.0.5-osx.tar.gz | tar xz
-cd istio-1.0.5
+curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.8 sh -
+cd istio-1.1.8
+```
+
+Configure Istioctl to your workstation:
+
+```bash
+export PATH=$PWD/bin:$PATH
+```
+
+Add the helm repo for Istio to your workstation:
+
+```bash
+helm repo add istio.io https://storage.googleapis.com/istio-release/releases/1.1.8/charts/
+
 ```
 
 Deploy the custom resource and app definitions via `kubectl`:
