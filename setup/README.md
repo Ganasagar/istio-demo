@@ -227,7 +227,7 @@ EOF
 In the next step, we will give the service principal for Edge-LB the permissions to control the pool istio-ingressgateway and apply the pool configuration.
 
 ```bash
-dcos security org users grant edgelb dcos:adminrouter:service:dcos-edgelb/pools/istio-ingressgateway full
+dcos security org users grant edge-lb-principal dcos:adminrouter:service:dcos-edgelb/pools/istio-ingressgateway full
 dcos edgelb create /tmp/pool-istio-ingressgateway.json
 ```
 
