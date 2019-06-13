@@ -29,11 +29,20 @@ helm repo add istio.io https://storage.googleapis.com/istio-release/releases/1.1
 
 ```
 
-Deploy the custom resource and app definitions via `kubectl`:
+Deploy the custom resource and app definitions in Permissive Mode using`kubectl`:
 
 ```bash
-kubectl apply -f install/kubernetes/helm/istio/templates/crds.yaml
+for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
+
 kubectl apply -f install/kubernetes/istio-demo.yaml
+```
+
+Deploy the custom resource and app definitions in Strict MTLS Mode using`kubectl`:
+
+```bash
+for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
+
+kubectl apply -f install/kubernetes/istio-demo-auth.yaml
 ```
 
 Check that all pods and services in the newly created `istio-system` are in the state `running` or `completed`:
