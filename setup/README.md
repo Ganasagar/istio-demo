@@ -28,41 +28,48 @@ Add the helm repo for Istio to your workstation:
 ```bash
 helm repo add istio.io https://storage.googleapis.com/istio-release/releases/1.2.2/charts/
 
-
 ```
 
-Permissive Mode
-Deploy the custom resource and app definitions in Permissive Mode using`kubectl`:
+Create Istio's Namespace
 
 ```bash
-for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
-
-kubectl apply -f install/kubernetes/values-istio-demo.yaml
+kubectl create namespace istio-system
 ```
-
-Strict Mode
-Deploy the custom resource and app definitions in Strict MTLS Mode using`kubectl`:
+Deploy's Istio's CRD (basic)
 
 ```bash
-for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
+# Deploy CRD's 
+helm template install/kubernetes/helm/istio-init --name istio-init --namespace istio-system | kubectl apply -f -
 
-kubectl apply -f install/kubernetes/istio-demo-auth.yaml
-```
-
-
-Deploy the custom resource and app definitions in Strict MTLS Mode using`Helm` and with certmanager :
-
-```bash
-#Deploy all the required CRD's
-helm template install/kubernetes/helm/istio-init --name istio-init --namespace istio-system --set global.mtls.enabled=true --set certmanager.enabled=true --set kiali.enabled=true --set grafana.enabled=true --set tracing.provider=zipkin | kubectl apply -f -
-
-#Check the count of CRD's should be 58
+#Check the count of CRD's should be 23
 kubectl get crds | grep 'istio.io\|certmanager.k8s.io' | wc -l
 
-#Install the templates
+# Build and deploy templates 
+helm template install/kubernetes/helm/istio --name istio --namespace istio-system \
+    --values install/kubernetes/helm/istio/values-istio-demo.yaml | kubectl apply -f -
+
+```
+Deploy's Istio's CRD (Advanced-mtls & SDS)
+
+```bash
+# Deploy CRD's 
+helm template install/kubernetes/helm/istio-init --name istio-init --namespace istio-system --set global.mtls.enabled=true --set certmanager.enabled=true  | kubectl apply -f -
+
+#Check the count of CRD's should be 28
+kubectl get crds | grep 'istio.io\|certmanager.k8s.io' | wc -l
+
+#Build and deploy the templates
 helm template install/kubernetes/helm/istio --name istio --namespace istio-system \
     --values install/kubernetes/helm/istio/values-istio-demo-auth.yaml | kubectl apply -f -
 ```
+```bash
+Further Advanced instllation:
+# Enabling SDS
+helm template install/kubernetes/helm/istio --name istio --namespace istio-system \
+    --values install/kubernetes/helm/istio/values-istio-sds-auth.yaml | kubectl apply -f -
+
+# 
+
 
 Check that all pods and services in the newly created `istio-system` are in the state `running` or `completed`:
 
