@@ -53,7 +53,15 @@ Deploy's Istio's CRD (Advanced-mtls & SDS)
 
 ```bash
 # Deploy CRD's 
-helm template install/kubernetes/helm/istio-init --name istio-init --namespace istio-system --set global.mtls.enabled=true --set certmanager.enabled=true  | kubectl apply -f -
+helm template install/kubernetes/helm/istio-init --name istio-init --namespace istio-system \
+--set global.mtls.enabled=true \
+--set certmanager.enabled=true \
+--set gateways.istio-ingressgateway.sds.enabled=true \
+--set global.k8sIngress.enabled=true \
+--set global.k8sIngress.enableHttps=true \
+--set global.k8sIngress.gatewayName=ingressgateway \
+--set certmanager.email=mailbox@donotuseexample.com \
+| kubectl apply -f -
 
 #Check the count of CRD's should be 28
 kubectl get crds | grep 'istio.io\|certmanager.k8s.io' | wc -l
@@ -74,7 +82,7 @@ helm template install/kubernetes/helm/istio --name istio --namespace istio-syste
 Check that all pods and services in the newly created `istio-system` are in the state `running` or `completed`:
 
 ```bash
-➜  istio-1.1.8 kubectl get po -n istio-system
+➜  kubectl get po -n istio-system
 NAME                                      READY   STATUS      RESTARTS   AGE
 grafana-67c69bb567-xfrxr                  1/1     Running     0          85s
 istio-citadel-58fc8bfb55-6z7pk            1/1     Running     0          84s
