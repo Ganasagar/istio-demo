@@ -7,7 +7,7 @@ This installation guide was tested with the following components:
 - Mesosphere DC/OS Enterprise 1.12.3
 - Mesosphere Kubernetes Engine 2.2.0-1.13.3
 - Edge-LB 1.3.0
-- Istio 1.0.5
+- Istio 1.2.2
 
 Download and unpack Istio to your workstation:
 
