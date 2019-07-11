@@ -12,8 +12,9 @@ This installation guide was tested with the following components:
 Download and unpack Istio to your workstation:
 
 ```bash
-curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.8 sh -
-cd istio-1.1.8
+curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.2.2 sh -
+
+cd istio-1.2.2
 ```
 
 Configure Istioctl to your workstation:
@@ -25,18 +26,21 @@ export PATH=$PWD/bin:$PATH
 Add the helm repo for Istio to your workstation:
 
 ```bash
-helm repo add istio.io https://storage.googleapis.com/istio-release/releases/1.1.8/charts/
+helm repo add istio.io https://storage.googleapis.com/istio-release/releases/1.2.2/charts/
+
 
 ```
 
+Permissive Mode
 Deploy the custom resource and app definitions in Permissive Mode using`kubectl`:
 
 ```bash
 for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
 
-kubectl apply -f install/kubernetes/istio-demo.yaml
+kubectl apply -f install/kubernetes/values-istio-demo.yaml
 ```
 
+Strict Mode
 Deploy the custom resource and app definitions in Strict MTLS Mode using`kubectl`:
 
 ```bash
