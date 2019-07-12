@@ -56,11 +56,6 @@ Deploy's Istio's CRD (Advanced-mtls & SDS)
 helm template install/kubernetes/helm/istio-init --name istio-init --namespace istio-system \
 --set global.mtls.enabled=true \
 --set certmanager.enabled=true \
---set gateways.istio-ingressgateway.sds.enabled=true \
---set global.k8sIngress.enabled=true \
---set global.k8sIngress.enableHttps=true \
---set global.k8sIngress.gatewayName=ingressgateway \
---set certmanager.email=mailbox@donotuseexample.com \
 | kubectl apply -f -
 
 #Check the count of CRD's should be 28
